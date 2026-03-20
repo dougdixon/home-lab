@@ -69,3 +69,9 @@ variable "root_password" {
   description = "Root password for the container"
   sensitive   = true
 }
+
+variable "ssh_public_keys" {
+  type        = list(string)
+  description = "SSH public keys to add to root's authorized_keys"
+  default     = []
+}
