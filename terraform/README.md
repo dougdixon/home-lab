@@ -8,7 +8,7 @@ Terraform configurations for provisioning home lab infrastructure on Proxmox usi
 terraform/
 ├── modules/
 │   └── lxc/          # Reusable module for Proxmox LXC containers
-└── ipa/              # FreeIPA server containers (ipa1, ipa2)
+└── auth/              # FreeIPA server containers (auth1, auth2)
 ```
 
 ## Prerequisites
@@ -25,12 +25,12 @@ Two LXC containers running Rocky Linux 10, deployed across two Proxmox nodes.
 
 | Name | VM ID | Node | IP              | CPU | Memory | Disk |
 |------|-------|------|-----------------|-----|--------|------|
-| ipa1 | 10041 | nuc1 | 192.168.10.41/23 | 2   | 4 GB   | 40 GB |
-| ipa2 | 10042 | nuc2 | 192.168.10.42/23 | 2   | 4 GB   | 40 GB |
+| auth1 | 10041 | nuc1 | 192.168.10.41/23 | 2   | 4 GB   | 40 GB |
+| auth2 | 10042 | nuc2 | 192.168.10.42/23 | 2   | 4 GB   | 40 GB |
 
 #### 1. Configure variables
 
-Edit `ipa/terraform.tfvars` and set your Proxmox API endpoint:
+Edit `auth/terraform.tfvars` and set your Proxmox API endpoint:
 
 ```hcl
 proxmox_endpoint = "https://192.168.10.X:8006"
@@ -47,7 +47,7 @@ export TF_VAR_root_password="<container-root-password>"
 #### 3. Initialize and deploy
 
 ```bash
-cd terraform/ipa
+cd terraform/auth
 terraform init
 terraform plan
 terraform apply
