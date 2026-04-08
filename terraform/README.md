@@ -8,7 +8,7 @@ Terraform configurations for provisioning home lab infrastructure on Proxmox usi
 terraform/
 ├── modules/
 │   └── lxc/          # Reusable module for Proxmox LXC containers
-└── auth/              # FreeIPA server containers (auth1, auth2)
+└── auth/             # FreeIPA server containers (auth1, auth2)
 ```
 
 ## Prerequisites
@@ -18,6 +18,14 @@ terraform/
 - Rocky Linux template `rockylinux-10-default_20251001_amd64.tar.xz` downloaded to the `local` storage on each target node
 
 ## Deployments
+
+### Ansible
+
+LXC container running Rocky Linux 10, deployed across on nuc2
+
+| Name | VM ID | Node | IP              | CPU | Memory | Disk |
+|------|-------|------|-----------------|-----|--------|------|
+| ansible | 10050 | nuc2 | 192.168.10.50/23 | 2   | 4 GB   | 40 GB |
 
 ### IPA (FreeIPA)
 
