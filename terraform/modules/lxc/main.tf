@@ -1,3 +1,7 @@
+locals {
+  provision_command = var.os_type == "ubuntu" ? "pct exec ${var.vm_id} -- systemctl enable --now ssh" : "pct exec ${var.vm_id} -- dnf install -y openssh-server && pct exec ${var.vm_id} -- systemctl enable --now sshd"
+}
+
 resource "proxmox_virtual_environment_container" "this" {
   node_name    = var.node_name
   vm_id        = var.vm_id
@@ -40,7 +44,7 @@ resource "proxmox_virtual_environment_container" "this" {
 
   operating_system {
     template_file_id = var.template_file_id
-    type             = "centos"
+    type             = var.os_type
   }
 
   features {
@@ -56,6 +60,6 @@ resource "null_resource" "provision" {
   }
 
   provisioner "local-exec" {
-    command = "ssh root@${var.node_name} 'pct exec ${var.vm_id} -- dnf install -y openssh-server && pct exec ${var.vm_id} -- systemctl enable --now sshd'"
+    command = "ssh root@${var.node_name} '${local.provision_command}'"
   }
 }

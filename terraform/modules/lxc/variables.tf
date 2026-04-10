@@ -64,6 +64,12 @@ variable "unprivileged" {
   default     = true
 }
 
+variable "os_type" {
+  type        = string
+  description = "Container OS type (e.g. centos, ubuntu, debian)"
+  default     = "centos"
+}
+
 variable "root_password" {
   type        = string
   description = "Root password for the container"
